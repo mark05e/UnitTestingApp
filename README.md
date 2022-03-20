@@ -3,20 +3,20 @@
   * [Introduction](#introduction)
   * [How to Install](#how-to-install)
   * [How to Use](#how-to-use)
-    + [Enabling, Disabling and Checking the Status of the Tests](#enabling--disabling-and-checking-the-status-of-the-tests)
+    + [Enabling, Disabling and Checking the Status of the Tests](#enablingdisabling-and-checking-the-status-of-the-tests)
     + [Choosing the Environment with runInGas(Boolean)](#choosing-the-environment-with-runingas-boolean-)
     + [Control Level of Information to log out](#control-level-of-information-to-log-out)
-    + [assert()](#assert--)
-    + [assertEquals()](#assertequals--)
-    + [catchErr()](#catcherr--)
-    + [is2dArray()](#is2darray--)
+    + [assert()](#assert)
+    + [assertEquals()](#assertequals)
+    + [catchErr()](#catcherr)
+    + [is2dArray()](#is2darray)
     + [Print-family Functions](#print-family-functions)
-      - [printHeader()](#printheader--)
-      - [printSubHeader()](#printsubheader--)
-      - [printSummary()](#printsummary--)
-    + [resetTestCounters()](#resettestcounters--)
-    + [clearConsole()](#clearconsole--)
-    + [addNewTest()](#addnewtest--)
+      - [printHeader()](#printheader)
+      - [printSubHeader()](#printsubheader)
+      - [printSummary()](#printsummary)
+    + [resetTestCounters()](#resettestcounters)
+    + [clearConsole()](#clearconsole)
+    + [addNewTest()](#addnewtest)
   * [The TestingTemplate.js File](#the-testingtemplatejs-file)
 
 ## Introduction
@@ -34,7 +34,7 @@ I also recommend that you use the [`TestingTemplate.js`](TestingTemplate.js) to 
 
 ## How to Use
 
-Inside there is a small class called [`UnitTestingApp`](UnitTestingApp.js#:~:text=class%20UnitTestingApp) with just a few simple functions (lightweight and easy to maintain, remember?). There is also the [`MockData`](MockData.js#:~:text=class%20MockData) class that allows you to add and work with, well, mock data, which is especially important when running tests offline.
+Inside there is a small class called [`UnitTestingApp`](UnitTestingApp.js#:~:text=class%20UnitTestingApp) with just a few simple functions (lightweight and easy to maintain, remember?). There is also the [`MockData`](/MockData.js#:~:text=class%20MockData) class that allows you to add and work with, well, mock data, which is especially important when running tests offline.
 
 ### Enabling, Disabling and Checking the Status of the Tests
 
@@ -156,7 +156,7 @@ Indicating that `2`test passed and `2` test failed and the total tests executed
 
 ### assert()
 
-[`assert(condition, message = null)`](UnitTestingApp.js#:~:text=assert(condition%2C%20message%20%3D%20null))
+[`assert(condition, message = null)`](/UnitTestingApp.js#:~:text=assert(condition%2C%20message%20%3D%20null))
 
 `assert()` is the main method of the class. The first argument that it takes is the condition and it checks whether the condition is truthy or falsy. The condition can either be a boolean value or a function that returns such a condition, function being the preferred approach for error catching reasons. If the condition is truthy, it logs out a “PASSED” message, otherwise it logs out a “FAILED” message. If you pass in a function that throws an error, the method will catch the error and log out a “ERROR” message and it counts as a fail test. For example:
 
@@ -199,7 +199,7 @@ will show an error message in the console as follow. For errors the library uses
 
 ### assertEquals()
 
-[`assertEquals(condition, expectedResult, message = null)`](UnitTestingApp.js#:~:text=assertEquals(condition%2C%20expectedResult%2C%20message%20%3D%20null))
+[`assertEquals(condition, expectedResult, message = null)`](/UnitTestingApp.js#:~:text=assertEquals(condition%2C%20expectedResult%2C%20message%20%3D%20null))
 
 Similar to `assert` function, handy for checking against specific expected result, `assert` function when input argument `message` is not provided, there is not way to verify the condition againts expected result, with `assertEquals` the buil-in default message helps to confirm the match or to identify the mismatch. Here is how to validate javascript standard `max()`function:
 
@@ -223,7 +223,7 @@ As in `assert` function in case an error is thrown an error message will be gene
 
 ### catchErr()
 
-[`catchErr(callback, errorMessage, message = null, errorType = null)`](UnitTestingApp.js#:~:text=catchErr(callback%2C%20errorMessage%2C%20message%20%3D%20null%2C%20errorType%20%3D%20null))
+[`catchErr(callback, errorMessage, message = null, errorType = null)`](/UnitTestingApp.js#:~:text=catchErr(callback%2C%20errorMessage%2C%20message%20%3D%20null%2C%20errorType%20%3D%20null))
 
 The goal of this method is to test whether your callback function (`callback`) catches the correct error message and/or error type. What you want to do is to make sure that the callback actually throws an error and then if it's the correct one. Then finally it will use `assert()` to log out the corresponding message. For example, let's say you have a function that returns the square value of a number you pass as the argument, and you want to throw an error if the argument isn't a number, then you can test the error this way:
 
@@ -337,7 +337,7 @@ test.catchErr(
 
 ### is2dArray()
 
-[`is2dArray(Array, message = null)`](UnitTestingApp.js#:~:text=is2dArray(array%2C%20message%20%3D%20null))
+[`is2dArray(Array, message = null)`](/UnitTestingApp.js#:~:text=is2dArray(array%2C%20message%20%3D%20null))
 
 This method runs a test to check whether the argument is a 2D array. This is useful for testing spreadsheet values before inserting them into a spreadsheet:
 
@@ -362,7 +362,7 @@ Then there are a couple of helper methods, `printHeader()` and `clearConsole()`.
 
 
 #### printHeader()
-The [`printHeader()`](UnitTestingApp.js#:~:text=printHeader(text)) function just helps with readability by printing a header in the console like this. It can be used for printing for example the title of the testing set. Here the expected result under `1` level of information:
+The [`printHeader()`](/UnitTestingApp.js#:~:text=printHeader(text)) function just helps with readability by printing a header in the console like this. It can be used for printing for example the title of the testing set. Here the expected result under `1` level of information:
 
 
 ```javascript
@@ -378,7 +378,7 @@ Logs out the following:
 ```
 
 #### printSubHeader()
-There also a second print header function: [`printSubHeader(text)`](UnitTestingApp.js#:~:text=printSubHeader(text)), usefull to log out a sub header as a single line with prefix `**`. Here the output under level of information equal to `1`:
+There also a second print header function: [`printSubHeader(text)`](/UnitTestingApp.js#:~:text=printSubHeader(text)), usefull to log out a sub header as a single line with prefix `**`. Here the output under level of information equal to `1`:
 
 ```javascript
 test.printSubHeader('Testing valid cases...');
@@ -391,7 +391,7 @@ logs out:
 ```
 
 #### printSummary()
-There is a third print function: [`printSummary()`](UnitTestingApp.js#:~:text=printSummary()), that logs out a summary of testing results (depending on the level of information we want to show)
+There is a third print function: [`printSummary()`](/UnitTestingApp.js#:~:text=printSummary()), that logs out a summary of testing results (depending on the level of information we want to show)
 
 ```javascript
 test.printSummary();
