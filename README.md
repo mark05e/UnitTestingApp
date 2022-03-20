@@ -27,14 +27,14 @@ This is a unit testing library with Google Apps Script in mind. It has 0 depenci
 
 Git clone the following files and copy them into your project:
 
-1. `UnitTestingApp.js`
-1. `MockData.js` (for running tests offline)
+1. [`UnitTestingApp.js`](UnitTestingApp.js)
+1. [`MockData.js`](MockData.js) (for running tests offline)
 
-I also recommend that you use the `TestingTemplate.js` to set up your tests.
+I also recommend that you use the [`TestingTemplate.js`](TestingTemplate.js) to set up your tests.
 
 ## How to Use
 
-Inside there is a small class called `UnitTestingApp` with just a few simple functions (lightweight and easy to maintain, remember?). There is also the `MockData` class that allows you to add and work with, well, mock data, which is especially important when running tests offline.
+Inside there is a small class called [`UnitTestingApp`](UnitTestingApp.js#:~:text=class%20UnitTestingApp) with just a few simple functions (lightweight and easy to maintain, remember?). There is also the [`MockData`](MockData.js#:~:text=class%20MockData) class that allows you to add and work with, well, mock data, which is especially important when running tests offline.
 
 ### Enabling, Disabling and Checking the Status of the Tests
 
@@ -156,13 +156,13 @@ Indicating that `2`test passed and `2` test failed and the total tests executed
 
 ### assert()
 
-`assert(condition, message = null)`
+[`assert(condition, message = null)`](UnitTestingApp.js#:~:text=assert(condition%2C%20message%20%3D%20null))
 
 `assert()` is the main method of the class. The first argument that it takes is the condition and it checks whether the condition is truthy or falsy. The condition can either be a boolean value or a function that returns such a condition, function being the preferred approach for error catching reasons. If the condition is truthy, it logs out a “PASSED” message, otherwise it logs out a “FAILED” message. If you pass in a function that throws an error, the method will catch the error and log out a “ERROR” message and it counts as a fail test. For example:
 
 ```javascript
 const num = 6;
-test.assert(() => num % 2 === 0, `Number ${num} is even`’); 
+test.assert(() => num % 2 === 0, `Number ${num} is even`'); 
 test.assert(() => num > 10, `Number ${num} is bigger than 10`); 
 ```
 logs out:
@@ -199,7 +199,7 @@ will show an error message in the console as follow. For errors the library uses
 
 ### assertEquals()
 
-`assertEquals(condition, expectedResult, message = null)`
+[`assertEquals(condition, expectedResult, message = null)`](UnitTestingApp.js#:~:text=assertEquals(condition%2C%20expectedResult%2C%20message%20%3D%20null))
 
 Similar to `assert` function, handy for checking against specific expected result, `assert` function when input argument `message` is not provided, there is not way to verify the condition againts expected result, with `assertEquals` the buil-in default message helps to confirm the match or to identify the mismatch. Here is how to validate javascript standard `max()`function:
 
@@ -223,9 +223,9 @@ As in `assert` function in case an error is thrown an error message will be gene
 
 ### catchErr()
 
-`catchErr(callback, errorMessage, message = null, errorType = null)`
+[`catchErr(callback, errorMessage, message = null, errorType = null)`](UnitTestingApp.js#:~:text=catchErr(callback%2C%20errorMessage%2C%20message%20%3D%20null%2C%20errorType%20%3D%20null))
 
-The goal of this method is to test whether your callback function (`callback`) catches the correct error message and/or error type. What you want to do is to make sure that the callback actually throws an error and then if it’s the correct one. Then finally it will use `assert()` to log out the corresponding message. For example, let’s say you have a function that returns the square value of a number you pass as the argument, and you want to throw an error if the argument isn’t a number, then you can test the error this way:
+The goal of this method is to test whether your callback function (`callback`) catches the correct error message and/or error type. What you want to do is to make sure that the callback actually throws an error and then if it's the correct one. Then finally it will use `assert()` to log out the corresponding message. For example, let's say you have a function that returns the square value of a number you pass as the argument, and you want to throw an error if the argument isn't a number, then you can test the error this way:
 
 ```javascript
 function square(number) {
@@ -234,7 +234,7 @@ function square(number) {
 }
 
 test.catchErr(
-   () => square("a string"), // we’re passing a string here to test that our function throws an error
+   () => square("a string"), // we're passing a string here to test that our function throws an error
    "Argument must be a number", // this is the error message we are expecting
    "We caught the type error correctly"
 );
@@ -242,7 +242,7 @@ test.catchErr(
 If message is not provided a bult-in message is provided as follow for previous example:
 ```javascript
 test.catchErr(
-   () => square("a string"), // we’re passing a string here to test that our function throws an error
+   () => square("a string"), // we're passing a string here to test that our function throws an error
    "Argument must be a number" // this is the error message we are expecting
 );
 ```
@@ -253,7 +253,7 @@ test.catchErr(
 Similar for fail case:
 ```javascript
 test.catchErr(
-   () => square("a string"), // we’re passing a string here to test that our function throws an error
+   () => square("a string"), // we're passing a string here to test that our function throws an error
    "Wrong error message" // this is the error message we are expecting
 );
 ```
@@ -265,25 +265,25 @@ When input argument `errorType` is provided it also checks the error type caught
 ```javascript
 // Correct error type and error message
 test.catchErr(
-    () => square("a string"), // we’re passing a string here to test that our function throws an error
+    () => square("a string"), // we're passing a string here to test that our function throws an error
     "Argument must be a number", // this is the error message we are expecting
     Error // This is the error type we are expecting
 );
 // Wrong error type and correct error message
 test.catchErr(
-  () => square("a string"), // we’re passing a string here to test that our function throws an error
+  () => square("a string"), // we're passing a string here to test that our function throws an error
   "Argument must be a number", // this is the error message we are expecting
   TypeError  // This is the error type we are expecting
 );
 // Correct error type and wrong error message
 test.catchErr(
-  () => square("a string"), // we’re passing a string here to test that our function throws an error
+  () => square("a string"), // we're passing a string here to test that our function throws an error
   "Wrong error message", // this is the error message we are expecting
   Error  // This is the error type we are expecting
 );
 // Wrong error type and error message
 test.catchErr(
-  () => square("a string"), // we’re passing a string here to test that our function throws an error
+  () => square("a string"), // we're passing a string here to test that our function throws an error
   "Wrong error message", // this is the error message we are expecting
   TypeError  // This is the error type we are expecting
 );
@@ -303,7 +303,7 @@ If we pass a valid value, no error is thrown:
 
 ```javascript
 test.catchErr(
-    () => square(2), // we’re passing a valid value
+    () => square(2), // we're passing a valid value
     "Argument must be a number", // this is the error message we are expecting
     Error
 );
@@ -326,7 +326,7 @@ We don't recommend to do it, because `catchErr()` function will require arrow fu
 
 ```javascript
 test.catchErr(
-   square("a string"), // we’re passing a string here to test that our function throws an error
+   square("a string"), // we're passing a string here to test that our function throws an error
    "Argument must be a number", // this is the error message we are expecting
    "We caught the type error correctly"
   );
@@ -337,17 +337,17 @@ test.catchErr(
 
 ### is2dArray()
 
-`is2dArray(Array, message = null)`
+[`is2dArray(Array, message = null)`](UnitTestingApp.js#:~:text=is2dArray(array%2C%20message%20%3D%20null))
 
 This method runs a test to check whether the argument is a 2D array. This is useful for testing spreadsheet values before inserting them into a spreadsheet:
 
 ```javascript
 const values = [
-  [‘a1’, ‘a2’],
-  [‘b1’, ‘b2’]
+  ['a1', 'a2'],
+  ['b1', 'b2']
 ];
 
-test.is2dArray(values, ‘values is an array of arrays’); // logs out PASSED
+test.is2dArray(values, 'values is an array of arrays'); // logs out PASSED
 
 ```
 If input argument `message` is not provided a built-in message is generated indicated the test passed or failed.
@@ -362,11 +362,11 @@ Then there are a couple of helper methods, `printHeader()` and `clearConsole()`.
 
 
 #### printHeader()
-The `printHeader()` function just helps with readability by printing a header in the console like this. It can be used for printing for example the title of the testing set. Here the expected result under `1` level of information:
+The [`printHeader()`](UnitTestingApp.js#:~:text=printHeader(text)) function just helps with readability by printing a header in the console like this. It can be used for printing for example the title of the testing set. Here the expected result under `1` level of information:
 
 
 ```javascript
-test.printHeader(‘Offline tests’);
+test.printHeader('Offline tests');
 ```
 
 Logs out the following:
@@ -378,10 +378,10 @@ Logs out the following:
 ```
 
 #### printSubHeader()
-There also a second print header function: `printSubHeader(text)`, usefull to log out a sub header as a single line with prefix `**`. Here the output under level of information equal to `1`:
+There also a second print header function: [`printSubHeader(text)`](UnitTestingApp.js#:~:text=printSubHeader(text)), usefull to log out a sub header as a single line with prefix `**`. Here the output under level of information equal to `1`:
 
 ```javascript
-test.printSubHeader(‘Testing valid cases...’);
+test.printSubHeader('Testing valid cases...');
 ```
 
 logs out:
@@ -391,7 +391,7 @@ logs out:
 ```
 
 #### printSummary()
-There is a third print function: `printSummary()`, that logs out a summary of testing results (depending on the level of information we want to show)
+There is a third print function: [`printSummary()`](UnitTestingApp.js#:~:text=printSummary()), that logs out a summary of testing results (depending on the level of information we want to show)
 
 ```javascript
 test.printSummary();
@@ -419,7 +419,7 @@ ALL TESTS ✔ PASSED
 
 
 ### resetTestCounters()
-The `resetTestCounters()` is usefull for reseting testing counters (`_nTests`, `_nFailTests`, `_nPassTests`, private attributes of the class `UnitTestingApp`), the function `printSummary()` will log out information depending on the overall testing results based on such attributes. We can use this function to reset testing counters after a running a set of tests, so we can print a summary information per set of tests using `printSummary()`.
+The [`resetTestCounters()`](UnitTestingApp.js#:~:text=resetTestCounters()) is usefull for reseting testing counters (`_nTests`, `_nFailTests`, `_nPassTests`, private attributes of the class `UnitTestingApp`), the function `printSummary()` will log out information depending on the overall testing results based on such attributes. We can use this function to reset testing counters after a running a set of tests, so we can print a summary information per set of tests using `printSummary()`.
 
 [Back to top](#unittestingapp-for-google-apps-script)
 
@@ -433,18 +433,18 @@ A straight-forward method that clears the console log if you are in the local en
 
 ### addNewTest()
 
-`addNewTest(functionName, func)`
+[`addNewTest(functionName, func)`](UnitTestingApp.js#:~:text=addNewTest(name%2C%20callback))
 
 And finally there is a way to add new tests to the calls with the `addNewTest()` method.
 
-Let’s say for example that we needed a test that would check whether a number is even:
+Let's say for example that we needed a test that would check whether a number is even:
 
 ```javascript
 function isEven(number, message) {
   this.assert(() => number % 2 === 0, message);
 }
 
-test.addNewTest(‘isEven’, isEven);
+test.addNewTest('isEven', isEven);
 
 const number = 8;
 test.isEven(number, `Number ${number} is even`); // logs out PASSED: Number 8 is even
@@ -455,7 +455,7 @@ test.isEven(number, `Number ${number} is even`); // logs out PASSED: Number 8 is
 
 ## The TestingTemplate.js File
 
-The template makes use of most of the above features.
+The [template](TestingTemplate.js) makes use of most of the above features.
 
 To make your tests offline-compatible, aways `require` modules inside an `if (typeof require !== 'undefined')` test and export modules in a similar way inside an `if (typeof module !== 'undefined') module.exports = YourClass`
 
