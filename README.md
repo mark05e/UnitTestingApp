@@ -3,8 +3,8 @@
   * [Introduction](#introduction)
   * [How to Install](#how-to-install)
   * [How to Use](#how-to-use)
-    + [Enabling, Disabling and Checking the Status of the Tests](#enablingdisabling-and-checking-the-status-of-the-tests)
-    + [Choosing the Environment with runInGas(Boolean)](#choosing-the-environment-with-runingas-boolean-)
+    + [Enabling, Disabling and Checking the Status of the Tests](#enabling-disabling-and-checking-the-status-of-the-tests)
+    + [Choosing the Environment with runInGas(Boolean)](#choosing-the-environment-with-runingasboolean)
     + [Control Level of Information to log out](#control-level-of-information-to-log-out)
     + [assert()](#assert)
     + [assertEquals()](#assertequals)
@@ -34,7 +34,7 @@ I also recommend that you use the [`TestingTemplate.js`](TestingTemplate.js) to 
 
 ## How to Use
 
-Inside there is a small class called [`UnitTestingApp`](UnitTestingApp.js#:~:text=class%20UnitTestingApp) with just a few simple functions (lightweight and easy to maintain, remember?). There is also the [`MockData`](/MockData.js#:~:text=class%20MockData) class that allows you to add and work with, well, mock data, which is especially important when running tests offline.
+Inside there is a small class called [`UnitTestingApp`](/UnitTestingApp.js#:~:text=class%20UnitTestingApp) with just a few simple functions (lightweight and easy to maintain, remember?). There is also the [`MockData`](/MockData.js#:~:text=class%20MockData) class that allows you to add and work with, well, mock data, which is especially important when running tests offline.
 
 ### Enabling, Disabling and Checking the Status of the Tests
 
@@ -419,7 +419,7 @@ ALL TESTS ✔ PASSED
 
 
 ### resetTestCounters()
-The [`resetTestCounters()`](UnitTestingApp.js#:~:text=resetTestCounters()) is usefull for reseting testing counters (`_nTests`, `_nFailTests`, `_nPassTests`, private attributes of the class `UnitTestingApp`), the function `printSummary()` will log out information depending on the overall testing results based on such attributes. We can use this function to reset testing counters after a running a set of tests, so we can print a summary information per set of tests using `printSummary()`.
+The [`resetTestCounters()`](/UnitTestingApp.js#:~:text=resetTestCounters()) is usefull for reseting testing counters (`_nTests`, `_nFailTests`, `_nPassTests`, private attributes of the class `UnitTestingApp`), the function `printSummary()` will log out information depending on the overall testing results based on such attributes. We can use this function to reset testing counters after a running a set of tests, so we can print a summary information per set of tests using `printSummary()`.
 
 [Back to top](#unittestingapp-for-google-apps-script)
 
@@ -433,7 +433,7 @@ A straight-forward method that clears the console log if you are in the local en
 
 ### addNewTest()
 
-[`addNewTest(functionName, func)`](UnitTestingApp.js#:~:text=addNewTest(name%2C%20callback))
+[`addNewTest(functionName, func)`](/UnitTestingApp.js#:~:text=addNewTest(name%2C%20callback))
 
 And finally there is a way to add new tests to the calls with the `addNewTest()` method.
 
