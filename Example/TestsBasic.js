@@ -1,5 +1,5 @@
 // jshint esversion: 8
-// import 'google-apps-script';
+
 /**
  * require libraries if the require method exists
  */

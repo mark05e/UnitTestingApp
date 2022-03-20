@@ -1,38 +1,42 @@
+// jshint esversion: 8
+
 /*
 Testing script for testing the new changes introduced in UnitTestingApp script on version 0.1.1
 */
 
-// jshint esversion: 8
+/**
+ * require libraries if the require method exists
+ */
 if (typeof require !== 'undefined') {
-  UnitTestingApp = require('./UnitTestingApp.js');
-}
-
-// Function to test
-function addTwoValues(a, b) {
-  return a + b;
-}
-
-// Function to test in case an error is thrown
-function addTwoValuesSafe(a, b) {
-  if (("number" != typeof a) || ("number" != typeof b)) throw new Error("Input argument is not a valid number");
-  return addTwoValues(a, b);
+  UnitTestingApp = require('../UnitTestingApp.js');
+  MockData = require('../MockData.js');
+  Events = require('./Events.js');
+  ArrayToHtml = require('./ArrayToHtml.js');
+  var {addTwoValues, addTwoValuesSafe} = require('./util/addTwoValues.js');
 }
 
 /*****************
  * TESTS 
- * Taking the sources files from: https://github.com/WildH0g/UnitTestingApp
  *****************/
 
 /**
  * Runs the tests; insert online and offline tests where specified by comments
  * @returns {void}
  */
-function runTests() {
+function runTestsAdvanced() {
   const test = new UnitTestingApp();
   test.enable();
   test.clearConsole();
-  test.runInGas(true);
 
+  addTwoValuesSafe(10,12);
+  const now = new Date();
+  const later = new Date(new Date().setDate(now.getDate() + 14));
+  const events = new Events(now, later);
+  const html = new ArrayToHtml(events.get()).code;
+
+  // Local Tests start
+  test.runInGas(false);
+  test.printHeader('LOCAL TESTS');
   /************************
    * Run Local Tests Here
   ************************/
@@ -80,7 +84,7 @@ function runTests() {
   test.printSubHeader("Testing using strings and validating with string value");
   test.printSubHeader("Reset counters");
   test.resetTestCounters();
-  test.printSubHeader("Test-1 pass with user message, Test-2 pass with default message, Test-3 fail with user message, Test-4 fail with default message")
+  test.printSubHeader("Test-1 pass with user message, Test-2 pass with default message, Test-3 fail with user message, Test-4 fail with default message");
   test.assertEquals("world", "world", "Expected to pass 'world' = 'world'"); // Pass
   test.assertEquals("world", "world"); // Pass
   test.assertEquals("world", "World", "Expected to fail 'world' != 'World'"); // Fail
@@ -468,4 +472,26 @@ function runTests() {
   test.printSubHeader("No expected output");
   test.printSummary();
 
+  // Online Tests start
+  test.runInGas(true);
+  test.printHeader('ONLINE TESTS');
+  /************************
+   * Run Online Tests Here
+   ************************/
+
+  test.is2dArray(events.get(), 'Calendar Data is a 2D array');
+
+  test.assert(
+    () => /^<table.*<\/table>$/i.test(html),
+    'The HTML code looks like a <table>'
+  );
+
 }
+
+(function() {
+  /**
+ * @param {Boolean} - if true, were're in the GAS environment, otherwise we're running locally
+ */
+  const IS_GAS_ENV = typeof ScriptApp !== 'undefined';
+  if (!IS_GAS_ENV) runTestsAdvanced();
+})();

@@ -1,0 +1,31 @@
+{
+  "name": "unittestingapp",
+  "version": "0.1.2",
+  "description": "This is a unit testing library with Google Apps Script in mind.",
+  "main": "TestingTemplate.js",
+  "scripts": {
+    "test": "node .\\Example\\TestsAdvanced.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mark05e/UnitTestingApp.git"
+  },
+  "keywords": [
+    "apps-script",
+    "google-apps-script",
+    "gsuite",
+    "google-workspace",
+    "testing",
+    "javascript"
+  ],
+  "author": "mark05e",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/mark05e/UnitTestingApp/issues"
+  },
+  "homepage": "https://github.com/mark05e/UnitTestingApp#readme",
+  "devDependencies": {
+    "@types/google-apps-script": "^1.0.45",
+    "jshint": "^2.13.4"
+  }
+}

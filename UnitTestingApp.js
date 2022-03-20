@@ -138,7 +138,7 @@ let UnitTestingApp = (function () {
       _nTests.set(this, _nTests.get(this) + 1);
   
       // wraps in quotes (') any type except numbers, booleans, null or undefined
-      function q(v) {return ('number' === typeof v) || ('boolean' === typeof v) || !v ? v: `'${v}'`}
+      function q(v) {return ('number' === typeof v) || ('boolean' === typeof v) || !v ? v: `'${v}'`;}
       try {
         if ("function" === typeof condition) condition = condition();
         let result = condition === expectedResult;
@@ -177,7 +177,7 @@ let UnitTestingApp = (function () {
     */
     catchErr(callback, errorMessage, message = null, errorType = null) {
       if (this.stopIfNotActive_()) return;
-      let isCaughtErrorMessage = false, isCaughtErrorType = true // Error type is optional so default result is true
+      let isCaughtErrorMessage = false, isCaughtErrorType = true; // Error type is optional so default result is true
 
       // Identify correct input argument by its expected type
       if ((message != null) && ("string" != typeof message)) {// invoked: catchErr(callback,string, null, Error)
@@ -236,7 +236,7 @@ let UnitTestingApp = (function () {
         let len = ("string" === typeof text) ? text.length + 2 : 20;
         if(len > 80) len = 80;
         console.log("*".repeat(len));
-        console.log('* ' + text)
+        console.log('* ' + text);
         console.log("*".repeat(len));
       }
     }
@@ -261,8 +261,7 @@ let UnitTestingApp = (function () {
     printSummary() {
       if (this.stopIfNotActive_()) return;
       let msg = "TOTAL TESTS=%d, ❌ FAILED=%d, ✔ PASSED=%d";
-      if (this.levelInfo >= 1) console.log(Utilities.formatString(msg, _nTests.get(this),
-        _nFailTests.get(this), _nPassTests.get(this)));
+      if (this.levelInfo >= 1) console.log(msg, _nTests.get(this), _nFailTests.get(this), _nPassTests.get(this));
       console.log((_nFailTests.get(this) == 0) ? "ALL TESTS ✔ PASSED" : "❌ Some Tests FAILED");
     }
 
