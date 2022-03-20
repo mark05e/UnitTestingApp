@@ -10,8 +10,8 @@ Testing script for testing the new changes introduced in UnitTestingApp script o
 if (typeof require !== 'undefined') {
   UnitTestingApp = require('../UnitTestingApp.js');
   MockData = require('../MockData.js');
-  Events = require('./Events.js');
-  ArrayToHtml = require('./ArrayToHtml.js');
+  Events = require('./util/Events.js');
+  ArrayToHtml = require('./util/ArrayToHtml.js');
   var {addTwoValues, addTwoValuesSafe} = require('./util/addTwoValues.js');
 }
 

@@ -1,5 +1,5 @@
 {
-  "name": "unittestingapp",
+  "name": "unittestingappforgas",
   "version": "0.1.2",
   "description": "This is a unit testing library with Google Apps Script in mind.",
   "main": "TestingTemplate.js",

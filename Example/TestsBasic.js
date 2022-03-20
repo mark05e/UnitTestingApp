@@ -5,9 +5,9 @@
  */
 if (typeof require !== 'undefined') {
   UnitTestingApp = require('../UnitTestingApp.js');
-  Events = require('./Events.js');
-  ArrayToHtml = require('./ArrayToHtml.js');
   MockData = require('../MockData.js');
+  Events = require('./util/Events.js');
+  ArrayToHtml = require('./util/ArrayToHtml.js');
 }
 
 /*****************

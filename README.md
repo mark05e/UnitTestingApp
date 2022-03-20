@@ -1,5 +1,25 @@
 # UnitTestingApp for Google Apps Script
 
+  * [Introduction](#introduction)
+  * [How to Install](#how-to-install)
+  * [How to Use](#how-to-use)
+    + [Enabling, Disabling and Checking the Status of the Tests](#enabling--disabling-and-checking-the-status-of-the-tests)
+    + [Choosing the Environment with runInGas(Boolean)](#choosing-the-environment-with-runingas-boolean-)
+    + [Control Level of Information to log out](#control-level-of-information-to-log-out)
+    + [assert(condition, message = null)](#assert-condition--message---null-)
+    + [assertEquals(condition, expectedResult, message = null)](#assertequals-condition--expectedresult--message---null-)
+    + [catchErr(callback, errorMessage, message = null, errorType = null)](#catcherr-callback--errormessage--message---null--errortype---null-)
+    + [is2dArray(Array, message = null)](#is2darray-array--message---null-)
+    + [Print-family Functions](#print-family-functions)
+      - [printHeader()](#printheader--)
+      - [printSubHeader()](#printsubheader--)
+      - [printSummary()](#printsummary--)
+    + [levelInfo](#levelinfo)
+    + [resetTestCounters()](#resettestcounters--)
+    + [clearConsole()](#clearconsole--)
+    + [addNewTest(functionName, func)](#addnewtest-functionname--func-)
+  * [The TestingTemplate.js File](#the-testingtemplatejs-file)
+
 ## Introduction
 
 This is a unit testing library with Google Apps Script in mind. It has 0 depencies, lightweight and can run online in the Google Apps Script environment as well as offline in you IDE.
@@ -315,6 +335,8 @@ Then there are a couple of helper methods, `printHeader()` and `clearConsole()`.
 
 **Note**: The level of information shown by print-family functions will depend on the level of information the user specified via `levelInfo`, or if no value was specified it assumes the level of information is `1`. See section: *Control Level of Information to log out* for more information.
 
+
+#### printHeader()
 The `printHeader()` function just helps with readability by printing a header in the console like this. It can be used for printing for example the title of the testing set. Here the expected result under `1` level of information:
 
 
@@ -330,6 +352,7 @@ Logs out the following:
 ***************
 ```
 
+#### printSubHeader()
 There also a second print header function: `printSubHeader(text)`, usefull to log out a sub header as a single line with prefix `**`. Here the output under level of information equal to `1`:
 
 ```javascript
@@ -342,6 +365,7 @@ logs out:
 ** Testing valid cases...
 ```
 
+#### printSummary()
 There is a third print function: `printSummary()`, that logs out a summary of testing results (depending on the level of information we want to show)
 
 ```javascript
@@ -354,7 +378,6 @@ If we ran 20 tests, where there is one failed test, under level of information e
 TOTAL TESTS= 20, ❌ FAILED=1, ✔ PASSED=19
 ❌ Some Tests FAILED
 ```
-
 Similarly if the `levelInfo` lower or equial than `0`, the output will be:
 
 ```
@@ -443,7 +466,3 @@ function runTests() {
   if (!IS_GAS_ENV) runTests();
 })();
 ```
-
-## Current Version
-
-0.1.1

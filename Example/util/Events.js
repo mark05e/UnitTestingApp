@@ -1,7 +1,7 @@
 // jshint esversion: 8
 // import 'google-apps-script';
 if (typeof require !== 'undefined') {
-  MockData = require ('../MockData.js');
+  MockData = require ('../../MockData.js');
 }
 /**
  * Gets calendar events and stores them as a 2D Array
