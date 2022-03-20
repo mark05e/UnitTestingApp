@@ -6,18 +6,17 @@
     + [Enabling, Disabling and Checking the Status of the Tests](#enabling--disabling-and-checking-the-status-of-the-tests)
     + [Choosing the Environment with runInGas(Boolean)](#choosing-the-environment-with-runingas-boolean-)
     + [Control Level of Information to log out](#control-level-of-information-to-log-out)
-    + [assert(condition, message = null)](#assert-condition--message---null-)
-    + [assertEquals(condition, expectedResult, message = null)](#assertequals-condition--expectedresult--message---null-)
-    + [catchErr(callback, errorMessage, message = null, errorType = null)](#catcherr-callback--errormessage--message---null--errortype---null-)
-    + [is2dArray(Array, message = null)](#is2darray-array--message---null-)
+    + [assert()](#assert--)
+    + [assertEquals()](#assertequals--)
+    + [catchErr()](#catcherr--)
+    + [is2dArray()](#is2darray--)
     + [Print-family Functions](#print-family-functions)
       - [printHeader()](#printheader--)
       - [printSubHeader()](#printsubheader--)
       - [printSummary()](#printsummary--)
-    + [levelInfo](#levelinfo)
     + [resetTestCounters()](#resettestcounters--)
     + [clearConsole()](#clearconsole--)
-    + [addNewTest(functionName, func)](#addnewtest-functionname--func-)
+    + [addNewTest()](#addnewtest--)
   * [The TestingTemplate.js File](#the-testingtemplatejs-file)
 
 ## Introduction
@@ -53,6 +52,8 @@ test.disable(); // tests will not run below this line
 ```
 **Note:** If tests are disable, print-family function will no produce any output regardless of the level of information we have configured to show. See section: *Control Level of Information to log out* for more information.
 
+[Back to top](#unittestingapp-for-google-apps-script)
+
 ### Choosing the Environment with runInGas(Boolean)
 
 The `runInGas(Boolean)` function allows us to choose which environment we want the tests that follow to run in, like so:
@@ -68,6 +69,8 @@ test.runInGas(true);
 ```
 
 Then we have the actual built-in testing methods, `assert()`, `catchErr()` and `is2dArray()`, etc..
+
+[Back to top](#unittestingapp-for-google-apps-script)
 
 ### Control Level of Information to log out
 
@@ -149,7 +152,11 @@ TOTAL TESTS= 4, ❌ FAILED=2, ✔ PASSED=2
 ```
 Indicating that `2`test passed and `2` test failed and the total tests executed
 
-### assert(condition, message = null)
+[Back to top](#unittestingapp-for-google-apps-script)
+
+### assert()
+
+`assert(condition, message = null)`
 
 `assert()` is the main method of the class. The first argument that it takes is the condition and it checks whether the condition is truthy or falsy. The condition can either be a boolean value or a function that returns such a condition, function being the preferred approach for error catching reasons. If the condition is truthy, it logs out a “PASSED” message, otherwise it logs out a “FAILED” message. If you pass in a function that throws an error, the method will catch the error and log out a “ERROR” message and it counts as a fail test. For example:
 
@@ -187,7 +194,13 @@ will show an error message in the console as follow. For errors the library uses
 
 **Note:** If input argument `message` is not provided a default built-in message is provided indicating the `condition` passed or failed.
 
-### assertEquals(condition, expectedResult, message = null)
+[Back to top](#unittestingapp-for-google-apps-script)
+
+
+### assertEquals()
+
+`assertEquals(condition, expectedResult, message = null)`
+
 Similar to `assert` function, handy for checking against specific expected result, `assert` function when input argument `message` is not provided, there is not way to verify the condition againts expected result, with `assertEquals` the buil-in default message helps to confirm the match or to identify the mismatch. Here is how to validate javascript standard `max()`function:
 
 
@@ -205,7 +218,12 @@ As in `assert` function in case an error is thrown an error message will be gene
 
 **Note:** Basic types values such as `number`, `boolean`, `null` or `undefined` are not wrapped in quotes ('), all other types are wrapped.
 
-### catchErr(callback, errorMessage, message = null, errorType = null)
+[Back to top](#unittestingapp-for-google-apps-script)
+
+
+### catchErr()
+
+`catchErr(callback, errorMessage, message = null, errorType = null)`
 
 The goal of this method is to test whether your callback function (`callback`) catches the correct error message and/or error type. What you want to do is to make sure that the callback actually throws an error and then if it’s the correct one. Then finally it will use `assert()` to log out the corresponding message. For example, let’s say you have a function that returns the square value of a number you pass as the argument, and you want to throw an error if the argument isn’t a number, then you can test the error this way:
 
@@ -314,7 +332,12 @@ test.catchErr(
   );
 ```
 
-### is2dArray(Array, message = null)
+[Back to top](#unittestingapp-for-google-apps-script)
+
+
+### is2dArray()
+
+`is2dArray(Array, message = null)`
 
 This method runs a test to check whether the argument is a 2D array. This is useful for testing spreadsheet values before inserting them into a spreadsheet:
 
@@ -329,9 +352,11 @@ test.is2dArray(values, ‘values is an array of arrays’); // logs out PASSED
 ```
 If input argument `message` is not provided a built-in message is generated indicated the test passed or failed.
 
-Then there are a couple of helper methods, `printHeader()` and `clearConsole()`.
+[Back to top](#unittestingapp-for-google-apps-script)
 
 ### Print-family Functions
+
+Then there are a couple of helper methods, `printHeader()` and `clearConsole()`.
 
 **Note**: The level of information shown by print-family functions will depend on the level of information the user specified via `levelInfo`, or if no value was specified it assumes the level of information is `1`. See section: *Control Level of Information to log out* for more information.
 
@@ -390,18 +415,27 @@ on contrary if all tests passed, will show:
 ALL TESTS ✔ PASSED
 ```
 
+[Back to top](#unittestingapp-for-google-apps-script)
+
 
 ### resetTestCounters()
 The `resetTestCounters()` is usefull for reseting testing counters (`_nTests`, `_nFailTests`, `_nPassTests`, private attributes of the class `UnitTestingApp`), the function `printSummary()` will log out information depending on the overall testing results based on such attributes. We can use this function to reset testing counters after a running a set of tests, so we can print a summary information per set of tests using `printSummary()`.
+
+[Back to top](#unittestingapp-for-google-apps-script)
 
 
 ### clearConsole()
 
 A straight-forward method that clears the console log if you are in the local environment.
 
-And finally there is a way to add new tests to the calls with the `addNewTest()` method.
+[Back to top](#unittestingapp-for-google-apps-script)
 
-### addNewTest(functionName, func)
+
+### addNewTest()
+
+`addNewTest(functionName, func)`
+
+And finally there is a way to add new tests to the calls with the `addNewTest()` method.
 
 Let’s say for example that we needed a test that would check whether a number is even:
 
@@ -416,6 +450,8 @@ const number = 8;
 test.isEven(number, `Number ${number} is even`); // logs out PASSED: Number 8 is even
 
 ```
+[Back to top](#unittestingapp-for-google-apps-script)
+
 
 ## The TestingTemplate.js File
 
@@ -466,3 +502,5 @@ function runTests() {
   if (!IS_GAS_ENV) runTests();
 })();
 ```
+
+[Back to top](#unittestingapp-for-google-apps-script)
